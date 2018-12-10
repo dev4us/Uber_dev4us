@@ -1,0 +1,18 @@
+{
+  "strategy": "SINGLE_FILE",
+  "flattenInnerTypes": false,
+  "template": "./template.handlebars",
+  "partials": [
+    "./inner-type.handlebars"
+  ],
+  "helpers": [
+    "./multiline-string.js"
+  ],
+  "primitives": {
+    "String": "String",
+    "Int": "Int",
+    "Float": "Float",
+    "Boolean": "Bool",
+    "ID": "String"
+  }
+}
