@@ -8,8 +8,14 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
   BeforeInsert,
-  BeforeUpdate
+  BeforeUpdate,
+  ManyToOne,
+  OneToMany
 } from "typeorm";
+import Chat from "./Chat";
+import Message from "./Message";
+import Verification from "./Verification";
+import Ride from "./Ride";
 
 const BRCYPT_ROUNDS = 4;
 
@@ -48,6 +54,21 @@ class User extends BaseEntity {
   lastLat: number;
   @Column({ type: "double precision", default: 0 })
   lastOrientation: number;
+
+  @ManyToOne(type => Chat, chat => chat.participants)
+  chat: Chat;
+
+  @OneToMany(type => Message, message => message.user)
+  messages: Message[];
+
+  @OneToMany(type => Verification, verification => verification.user)
+  verifications: Verification[];
+
+  @OneToMany(type => Ride, ride => ride.passenger)
+  rideAsPassenger: Ride[];
+
+  @OneToMany(type => Ride, ride => ride.driver)
+  rideAsDriver: Ride[];
 
   @CreateDateColumn() createdAt: string;
   @UpdateDateColumn() updatedAt: string;
