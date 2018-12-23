@@ -22,16 +22,16 @@ const BRCYPT_ROUNDS = 4;
 @Entity()
 class User extends BaseEntity {
   @PrimaryGeneratedColumn() id: number;
-  @Column({ type: "text", unique: true })
+  @Column({ type: "text", nullable: true })
   @IsEmail()
-  email: string;
+  email: string | null;
   @Column({ type: "boolean", default: false })
   verifiedEmail: boolean;
   @Column({ type: "text" })
   firstName: string;
   @Column({ type: "text" })
   lastName: string;
-  @Column({ type: "int" })
+  @Column({ type: "int", nullable: true })
   age: number;
   @Column({ type: "text" })
   password: string;
@@ -39,6 +39,8 @@ class User extends BaseEntity {
   phoneNumber: string;
   @Column({ type: "boolean", default: false })
   verifiedPhonenNumber: boolean;
+  @Column({ type: "text", nullable: true })
+  fbId: string;
   @Column({ type: "text" })
   profilePhoto: string;
   @Column({ type: "boolean", default: false })

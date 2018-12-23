@@ -2,11 +2,11 @@ type Ride {
   id: Int!
   status: String!
   pickUpAddress: String!
-  pickUpLat:Float!
+  pickUpLat: Float!
   pickUpLng: Float!
   dropOffAddress: String!
-  dropOffLat: Float;
-  dropOffLng: Float;
+  dropOffLat: Float!
+  dropOffLng: Float!
   price: Float!
   duration: String!
   distance: String!
