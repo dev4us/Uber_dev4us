@@ -2,60 +2,75 @@ import bcrypt from "bcrypt";
 import { IsEmail } from "class-validator";
 import {
   BaseEntity,
+  BeforeInsert,
+  BeforeUpdate,
   Column,
   CreateDateColumn,
   Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-  BeforeInsert,
-  BeforeUpdate,
   ManyToOne,
-  OneToMany
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
 } from "typeorm";
 import Chat from "./Chat";
 import Message from "./Message";
-import Verification from "./Verification";
 import Ride from "./Ride";
+import Verification from "./Verification";
 
-const BRCYPT_ROUNDS = 4;
+const BCRYPT_ROUNDS = 10;
 
 @Entity()
 class User extends BaseEntity {
   @PrimaryGeneratedColumn() id: number;
+
   @Column({ type: "text", nullable: true })
   @IsEmail()
   email: string | null;
+
   @Column({ type: "boolean", default: false })
   verifiedEmail: boolean;
+
   @Column({ type: "text" })
   firstName: string;
+
   @Column({ type: "text" })
   lastName: string;
+
   @Column({ type: "int", nullable: true })
   age: number;
-  @Column({ type: "text" })
+
+  @Column({ type: "text", nullable: true })
   password: string;
-  @Column({ type: "text" })
+
+  @Column({ type: "text", nullable: true })
   phoneNumber: string;
+
   @Column({ type: "boolean", default: false })
   verifiedPhonenNumber: boolean;
-  @Column({ type: "text", nullable: true })
-  fbId: string;
+
   @Column({ type: "text" })
   profilePhoto: string;
+
   @Column({ type: "boolean", default: false })
   isDriving: boolean;
+
   @Column({ type: "boolean", default: false })
   isRiding: boolean;
+
   @Column({ type: "boolean", default: false })
   isTaken: boolean;
 
   @Column({ type: "double precision", default: 0 })
   lastLng: number;
+
   @Column({ type: "double precision", default: 0 })
   lastLat: number;
+
   @Column({ type: "double precision", default: 0 })
   lastOrientation: number;
+
+  @Column({ type: "text", nullable: true })
+  fbId: string;
 
   @ManyToOne(type => Chat, chat => chat.participants)
   chat: Chat;
@@ -67,12 +82,13 @@ class User extends BaseEntity {
   verifications: Verification[];
 
   @OneToMany(type => Ride, ride => ride.passenger)
-  rideAsPassenger: Ride[];
+  ridesAsPassenger: Ride[];
 
   @OneToMany(type => Ride, ride => ride.driver)
-  rideAsDriver: Ride[];
+  ridesAsDriver: Ride[];
 
   @CreateDateColumn() createdAt: string;
+
   @UpdateDateColumn() updatedAt: string;
 
   get fullName(): string {
@@ -93,7 +109,8 @@ class User extends BaseEntity {
   }
 
   private hashPassword(password: string): Promise<string> {
-    return bcrypt.hash(password, BRCYPT_ROUNDS);
+    return bcrypt.hash(password, BCRYPT_ROUNDS);
   }
 }
+
 export default User;

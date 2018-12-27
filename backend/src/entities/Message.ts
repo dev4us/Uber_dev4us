@@ -5,8 +5,7 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToOne,
-  OneToMany
+  ManyToOne
 } from "typeorm";
 
 import Chat from "./Chat";
