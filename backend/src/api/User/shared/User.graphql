@@ -19,7 +19,6 @@ type User {
   lastOrientation: Float
   chat: Chat
   Messages: [Message]
-  verifications: [Verification]
   rideAsPassenger: [Ride]
   rideAsDriver: [Ride]
   createAt: String!
