@@ -3,7 +3,8 @@ import {
   EmailSignUpMutationArgs,
   EmailSignUpResponse
 } from "src/types/graphql";
-import User from "src/entities/User";
+import User from "../../../../src/entities/User";
+import createJWT from "../../../../src/utils/createJWT";
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -22,12 +23,13 @@ const resolvers: Resolvers = {
             token: null
           };
         } else {
-          await User.create({ ...args }).save();
+          const newUser = await User.create({ ...args }).save();
+          const token = createJWT(newUser.id);
 
           return {
             ok: true,
             error: null,
-            token: "Coming soon"
+            token
           };
         }
       } catch (error) {

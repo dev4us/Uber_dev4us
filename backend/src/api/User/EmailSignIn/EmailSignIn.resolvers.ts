@@ -4,6 +4,7 @@ import {
   EmailSignInResponse
 } from "src/types/graphql";
 import User from "../../../../src/entities/User";
+import createJWT from "../../../../src/utils/createJWT";
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -24,10 +25,12 @@ const resolvers: Resolvers = {
         const checkPassword = await user.comparePassword(password);
 
         if (checkPassword) {
+          const token = createJWT(user.id);
+
           return {
             ok: true,
             error: null,
-            token: "coming soon"
+            token
           };
         } else {
           return {

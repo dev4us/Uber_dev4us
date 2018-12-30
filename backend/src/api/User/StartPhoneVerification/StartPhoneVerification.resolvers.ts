@@ -30,8 +30,6 @@ const resolvers: Resolvers = {
         // To do: send sms
         await sendVerificationSMS(newVerification.payload, newVerification.key);
 
-        console.log(newVerification);
-
         return {
           ok: true,
           error: null

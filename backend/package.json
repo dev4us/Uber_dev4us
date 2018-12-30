@@ -9,7 +9,8 @@
     "@types/helmet": "^0.0.42",
     "@types/morgan": "^1.7.35",
     "@types/node": "^10.12.11",
-    "@types/twilio": "^0.0.10"
+    "@types/twilio": "^0.0.10",
+    "@types/jsonwebtoken": "^8.3.0"
   },
   "scripts": {
     "predev": "yarn run types",
@@ -23,19 +24,20 @@
     "class-validator": "^0.9.1",
     "cors": "^2.8.5",
     "dotenv": "^6.2.0",
+    "gql-merge": "^0.0.6",
+    "graphql-to-typescript": "^0.1.2",
     "graphql-tools": "^4.0.3",
     "graphql-yoga": "^1.16.7",
     "helmet": "^3.15.0",
+    "jsonwebtoken": "^8.4.0",
     "merge-graphql-schemas": "^1.5.8",
     "morgan": "^1.9.1",
-    "pg": "^7.7.1",
-    "twilio": "^3.26.0",
-    "typeorm": "^0.2.9",
-    "gql-merge": "^0.0.6",
-    "graphql-to-typescript": "^0.1.2",
     "nodemon": "^1.18.7",
+    "pg": "^7.7.1",
     "ts-node": "^7.0.1",
     "tslint-config-prettier": "^1.17.0",
+    "twilio": "^3.26.0",
+    "typeorm": "^0.2.9",
     "typescript": "^3.2.1"
   }
 }
