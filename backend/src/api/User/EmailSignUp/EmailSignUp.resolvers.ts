@@ -5,6 +5,8 @@ import {
 } from "src/types/graphql";
 import User from "../../../../src/entities/User";
 import createJWT from "../../../../src/utils/createJWT";
+import Verification from "../../../../src/entities/Verification";
+import { sendVerificationEmail } from "../../../../src/utils/sendEmail";
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -23,14 +25,39 @@ const resolvers: Resolvers = {
             token: null
           };
         } else {
-          const newUser = await User.create({ ...args }).save();
-          const token = createJWT(newUser.id);
+          const phoneVerification = await Verification.findOne({
+            payload: args.phoneNumber,
+            verified: true
+          });
+          if (phoneVerification) {
+            const newUser = await User.create({ ...args }).save();
 
-          return {
-            ok: true,
-            error: null,
-            token
-          };
+            if (newUser.email) {
+              const emailVerification = await Verification.create({
+                payload: newUser.email,
+                target: "EMAIL"
+              }).save();
+
+              await sendVerificationEmail(
+                newUser.email,
+                newUser.fullName,
+                emailVerification.key
+              );
+            }
+            const token = createJWT(newUser.id);
+
+            return {
+              ok: true,
+              error: null,
+              token
+            };
+          } else {
+            return {
+              ok: false,
+              error: "You haven't verified your phone number",
+              token: null
+            };
+          }
         }
       } catch (error) {
         return {
