@@ -22,7 +22,7 @@ export const sendVerificationEmail = (
   key: string
 ) => {
   const emailSubject = `hello! ${fullName}, please verify your email!`;
-  const emailBody = `Verify your email by clicking <a href="http://ww.ww.ww?=${key}">here</a>`;
+  const emailBody = `Verify your email by clicking <a href="http://ww.ww.ww/verification/${key}">here</a>`;
 
   return sendEmail(to, emailSubject, emailBody);
 };

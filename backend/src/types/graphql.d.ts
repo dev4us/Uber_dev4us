@@ -1,4 +1,4 @@
-export const typeDefs = ["type Chat {\n  id: Int!\n  Messages: [Message]!\n  participants: [User]!\n  createAt: String!\n  updatedAt: String\n}\n\ntype Message {\n  id: Int!\n  text: String!\n  chat: Chat!\n  user: User!\n  createAt: String!\n  updatedAt: String\n}\n\ntype Place {\n  id: Int!\n  name: String!\n  lat: Float!\n  lng: Float!\n  address: String!\n  isFav: Boolean!\n  createAt: String!\n  updatedAt: String\n}\n\ntype Ride {\n  id: Int!\n  status: String!\n  pickUpAddress: String!\n  pickUpLat: Float!\n  pickUpLng: Float!\n  dropOffAddress: String!\n  dropOffLat: Float!\n  dropOffLng: Float!\n  price: Float!\n  duration: String!\n  distance: String!\n  driver: User!\n  passenger: User!\n  createAt: String!\n  updatedAt: String\n}\n\ntype CompletePhoneVerificationResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype Mutation {\n  CompletePhoneVerification(phoneNumber: String!, key: String!): CompletePhoneVerificationResponse!\n  EmailSignIn(email: String!, password: String!): EmailSignInResponse!\n  EmailSignUp(firstName: String!, lastName: String!, email: String!, password: String!, profilePhoto: String!, age: Int!, phoneNumber: String!): EmailSignUpResponse!\n  FacebookConnect(firstName: String!, lastName: String!, email: String, fbId: String!): FacebookConnectResponse!\n  StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!\n}\n\ntype EmailSignInResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype EmailSignUpResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype FacebookConnectResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype GetMyProfileResponse {\n  ok: Boolean!\n  error: String\n  user: User\n}\n\ntype Query {\n  GetMyProfile: GetMyProfileResponse!\n  user: User\n}\n\ntype User {\n  id: Int!\n  fbId: String\n  email: String\n  verifiedEmail: Boolean!\n  firstName: String!\n  lastName: String!\n  fullName: String\n  age: Int\n  password: String\n  phoneNumber: String\n  verifiedPhoneNumber: Boolean!\n  profilePhoto: String\n  isDriving: Boolean!\n  isRiding: Boolean!\n  isTaken: Boolean!\n  lastLng: Float\n  lastLat: Float\n  lastOrientation: Float\n  chat: Chat\n  Messages: [Message]\n  rideAsPassenger: [Ride]\n  rideAsDriver: [Ride]\n  createAt: String!\n  updatedAt: String\n}\n\ntype StartPhoneVerificationResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype Verification {\n  id: Int!\n  target: String!\n  payload: String!\n  key: String!\n  verified: Boolean!\n  createdAt: String!\n  updatedAt: String!\n}\n"];
+export const typeDefs = ["type Chat {\n  id: Int!\n  Messages: [Message]!\n  participants: [User]!\n  createAt: String!\n  updatedAt: String\n}\n\ntype Message {\n  id: Int!\n  text: String!\n  chat: Chat!\n  user: User!\n  createAt: String!\n  updatedAt: String\n}\n\ntype AddPlaceResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype Mutation {\n  AddPlace(name: String!, lat: Float!, lng: Float!, address: String!, isFav: Boolean!): AddPlaceResponse!\n  EditPlace(placeId: Int!, name: String, isFav: Boolean): EditPlaceResponse!\n  CompleteEmailVerification(key: String!): CompleteEmailVerificationResponse!\n  CompletePhoneVerification(phoneNumber: String!, key: String!): CompletePhoneVerificationResponse!\n  EmailSignIn(email: String!, password: String!): EmailSignInResponse!\n  EmailSignUp(firstName: String!, lastName: String!, email: String!, password: String!, profilePhoto: String!, age: Int!, phoneNumber: String!): EmailSignUpResponse!\n  FacebookConnect(firstName: String!, lastName: String!, email: String, fbId: String!): FacebookConnectResponse!\n  ReportMovement(orientation: Float, lng: Float, lat: Float): ReportMovementResponse!\n  RequestEmailVerification: RequestEmailVerificationResponse!\n  StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!\n  ToggleDrivingMode: ToggleDrivingModeResponse!\n  UpdateUserProfile(firstName: String, lastName: String, email: String, password: String, profilePhoto: String, age: Int): UpdateUserProfileResponse!\n}\n\ntype EditPlaceResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype Place {\n  id: Int!\n  name: String!\n  lat: Float!\n  lng: Float!\n  address: String!\n  isFav: Boolean!\n  user: User!\n  userId: Int!\n  createAt: String!\n  updatedAt: String\n}\n\ntype Ride {\n  id: Int!\n  status: String!\n  pickUpAddress: String!\n  pickUpLat: Float!\n  pickUpLng: Float!\n  dropOffAddress: String!\n  dropOffLat: Float!\n  dropOffLng: Float!\n  price: Float!\n  duration: String!\n  distance: String!\n  driver: User!\n  passenger: User!\n  createAt: String!\n  updatedAt: String\n}\n\ntype CompleteEmailVerificationResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype CompletePhoneVerificationResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype EmailSignInResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype EmailSignUpResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype FacebookConnectResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype GetMyProfileResponse {\n  ok: Boolean!\n  error: String\n  user: User\n}\n\ntype Query {\n  GetMyProfile: GetMyProfileResponse!\n  user: User\n}\n\ntype ReportMovementResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype RequestEmailVerificationResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype User {\n  id: Int!\n  fbId: String\n  email: String\n  verifiedEmail: Boolean!\n  firstName: String!\n  lastName: String!\n  fullName: String\n  age: Int\n  password: String\n  phoneNumber: String\n  verifiedPhoneNumber: Boolean!\n  profilePhoto: String\n  isDriving: Boolean!\n  isRiding: Boolean!\n  isTaken: Boolean!\n  lastLng: Float\n  lastLat: Float\n  lastOrientation: Float\n  chat: Chat\n  Messages: [Message]\n  rideAsPassenger: [Ride]\n  rideAsDriver: [Ride]\n  places: [Place]\n  createAt: String!\n  updatedAt: String\n}\n\ntype StartPhoneVerificationResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype ToggleDrivingModeResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype UpdateUserProfileResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype Verification {\n  id: Int!\n  target: String!\n  payload: String!\n  key: String!\n  verified: Boolean!\n  createdAt: String!\n  updatedAt: String!\n}\n"];
 /* tslint:disable */
 
 export interface Query {
@@ -35,6 +35,7 @@ export interface User {
   Messages: Array<Message> | null;
   rideAsPassenger: Array<Ride> | null;
   rideAsDriver: Array<Ride> | null;
+  places: Array<Place> | null;
   createAt: string;
   updatedAt: string | null;
 }
@@ -74,12 +75,50 @@ export interface Ride {
   updatedAt: string | null;
 }
 
+export interface Place {
+  id: number;
+  name: string;
+  lat: number;
+  lng: number;
+  address: string;
+  isFav: boolean;
+  user: User;
+  userId: number;
+  createAt: string;
+  updatedAt: string | null;
+}
+
 export interface Mutation {
+  AddPlace: AddPlaceResponse;
+  EditPlace: EditPlaceResponse;
+  CompleteEmailVerification: CompleteEmailVerificationResponse;
   CompletePhoneVerification: CompletePhoneVerificationResponse;
   EmailSignIn: EmailSignInResponse;
   EmailSignUp: EmailSignUpResponse;
   FacebookConnect: FacebookConnectResponse;
+  ReportMovement: ReportMovementResponse;
+  RequestEmailVerification: RequestEmailVerificationResponse;
   StartPhoneVerification: StartPhoneVerificationResponse;
+  ToggleDrivingMode: ToggleDrivingModeResponse;
+  UpdateUserProfile: UpdateUserProfileResponse;
+}
+
+export interface AddPlaceMutationArgs {
+  name: string;
+  lat: number;
+  lng: number;
+  address: string;
+  isFav: boolean;
+}
+
+export interface EditPlaceMutationArgs {
+  placeId: number;
+  name: string | null;
+  isFav: boolean | null;
+}
+
+export interface CompleteEmailVerificationMutationArgs {
+  key: string;
 }
 
 export interface CompletePhoneVerificationMutationArgs {
@@ -109,8 +148,38 @@ export interface FacebookConnectMutationArgs {
   fbId: string;
 }
 
+export interface ReportMovementMutationArgs {
+  orientation: number | null;
+  lng: number | null;
+  lat: number | null;
+}
+
 export interface StartPhoneVerificationMutationArgs {
   phoneNumber: string;
+}
+
+export interface UpdateUserProfileMutationArgs {
+  firstName: string | null;
+  lastName: string | null;
+  email: string | null;
+  password: string | null;
+  profilePhoto: string | null;
+  age: number | null;
+}
+
+export interface AddPlaceResponse {
+  ok: boolean;
+  error: string | null;
+}
+
+export interface EditPlaceResponse {
+  ok: boolean;
+  error: string | null;
+}
+
+export interface CompleteEmailVerificationResponse {
+  ok: boolean;
+  error: string | null;
 }
 
 export interface CompletePhoneVerificationResponse {
@@ -137,20 +206,29 @@ export interface FacebookConnectResponse {
   token: string | null;
 }
 
+export interface ReportMovementResponse {
+  ok: boolean;
+  error: string | null;
+}
+
+export interface RequestEmailVerificationResponse {
+  ok: boolean;
+  error: string | null;
+}
+
 export interface StartPhoneVerificationResponse {
   ok: boolean;
   error: string | null;
 }
 
-export interface Place {
-  id: number;
-  name: string;
-  lat: number;
-  lng: number;
-  address: string;
-  isFav: boolean;
-  createAt: string;
-  updatedAt: string | null;
+export interface ToggleDrivingModeResponse {
+  ok: boolean;
+  error: string | null;
+}
+
+export interface UpdateUserProfileResponse {
+  ok: boolean;
+  error: string | null;
 }
 
 export interface Verification {
