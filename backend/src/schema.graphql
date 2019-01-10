@@ -1,8 +1,8 @@
 type Chat {
   id: Int!
-  Messages: [Message]!
+  messages: [Message]!
   participants: [User]!
-  createAt: String!
+  createdAt: String!
   updatedAt: String
 }
 
@@ -11,7 +11,7 @@ type Message {
   text: String!
   chat: Chat!
   user: User!
-  createAt: String!
+  createdAt: String!
   updatedAt: String
 }
 
@@ -22,6 +22,7 @@ type AddPlaceResponse {
 
 type Mutation {
   AddPlace(name: String!, lat: Float!, lng: Float!, address: String!, isFav: Boolean!): AddPlaceResponse!
+  DeletePlace(placeId: Int!): DeletePlaceResponse!
   EditPlace(placeId: Int!, name: String, isFav: Boolean): EditPlaceResponse!
   CompleteEmailVerification(key: String!): CompleteEmailVerificationResponse!
   CompletePhoneVerification(phoneNumber: String!, key: String!): CompletePhoneVerificationResponse!
@@ -35,9 +36,26 @@ type Mutation {
   UpdateUserProfile(firstName: String, lastName: String, email: String, password: String, profilePhoto: String, age: Int): UpdateUserProfileResponse!
 }
 
+type DeletePlaceResponse {
+  ok: Boolean!
+  error: String
+}
+
 type EditPlaceResponse {
   ok: Boolean!
   error: String
+}
+
+type GetMyPlacesResponse {
+  ok: Boolean!
+  error: String
+  places: [Place]
+}
+
+type Query {
+  GetMyPlaces: GetMyPlacesResponse!
+  GetMyProfile: GetMyProfileResponse!
+  user: User
 }
 
 type Place {
@@ -49,7 +67,7 @@ type Place {
   isFav: Boolean!
   user: User!
   userId: Int!
-  createAt: String!
+  createdAt: String!
   updatedAt: String
 }
 
@@ -67,7 +85,7 @@ type Ride {
   distance: String!
   driver: User!
   passenger: User!
-  createAt: String!
+  createdAt: String!
   updatedAt: String
 }
 
@@ -106,11 +124,6 @@ type GetMyProfileResponse {
   user: User
 }
 
-type Query {
-  GetMyProfile: GetMyProfileResponse!
-  user: User
-}
-
 type ReportMovementResponse {
   ok: Boolean!
   error: String
@@ -141,11 +154,11 @@ type User {
   lastLat: Float
   lastOrientation: Float
   chat: Chat
-  Messages: [Message]
-  rideAsPassenger: [Ride]
-  rideAsDriver: [Ride]
+  messages: [Message]
+  ridesAsPassenger: [Ride]
+  ridesAsDriver: [Ride]
   places: [Place]
-  createAt: String!
+  createdAt: String!
   updatedAt: String
 }
 

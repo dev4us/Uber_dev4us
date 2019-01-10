@@ -29,8 +29,8 @@ class Place extends BaseEntity {
   @ManyToOne(type => User, user => user.places)
   user: User;
 
-  @CreateDateColumn() createdAt: String;
-  @UpdateDateColumn() updatedAt: String;
+  @CreateDateColumn() createdAt: string;
+  @UpdateDateColumn() updatedAt: string;
 }
 
 export default Place;

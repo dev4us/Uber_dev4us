@@ -53,8 +53,8 @@ class Ride extends BaseEntity {
   @ManyToOne(type => User, user => user.ridesAsPassenger)
   passenger: User;
 
-  @CreateDateColumn() createdAt: String;
-  @UpdateDateColumn() updatedAt: String;
+  @CreateDateColumn() createdAt: string;
+  @UpdateDateColumn() updatedAt: string;
 }
 
 export default Ride;

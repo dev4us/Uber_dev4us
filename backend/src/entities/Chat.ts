@@ -20,8 +20,8 @@ class Chat extends BaseEntity {
   @OneToMany(type => User, user => user.chat)
   participants: User[];
 
-  @CreateDateColumn() createdAt: String;
-  @UpdateDateColumn() updatedAt: String;
+  @CreateDateColumn() createdAt: string;
+  @UpdateDateColumn() updatedAt: string;
 }
 
 export default Chat;

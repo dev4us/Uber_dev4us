@@ -16,7 +16,7 @@ class Message extends BaseEntity {
   @PrimaryGeneratedColumn() id: number;
 
   @Column({ type: "text" })
-  text: String;
+  text: string;
 
   @ManyToOne(type => Chat, chat => chat.messages)
   chat: Chat;
@@ -24,8 +24,8 @@ class Message extends BaseEntity {
   @ManyToOne(type => User, user => user.messages)
   user: User;
 
-  @CreateDateColumn() createdAt: String;
-  @UpdateDateColumn() updatedAt: String;
+  @CreateDateColumn() createdAt: string;
+  @UpdateDateColumn() updatedAt: string;
 }
 
 export default Message;
