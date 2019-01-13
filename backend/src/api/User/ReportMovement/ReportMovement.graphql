@@ -6,7 +6,7 @@ type ReportMovementResponse {
 type Mutation {
   ReportMovement(
     orientation: Float
-    lng: Float
-    lat: Float
+    lastLng: Float
+    lastLat: Float
   ): ReportMovementResponse!
 }

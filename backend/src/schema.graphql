@@ -29,7 +29,7 @@ type Mutation {
   EmailSignIn(email: String!, password: String!): EmailSignInResponse!
   EmailSignUp(firstName: String!, lastName: String!, email: String!, password: String!, profilePhoto: String!, age: Int!, phoneNumber: String!): EmailSignUpResponse!
   FacebookConnect(firstName: String!, lastName: String!, email: String, fbId: String!): FacebookConnectResponse!
-  ReportMovement(orientation: Float, lng: Float, lat: Float): ReportMovementResponse!
+  ReportMovement(orientation: Float, lastLng: Float, lastLat: Float): ReportMovementResponse!
   RequestEmailVerification: RequestEmailVerificationResponse!
   StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!
   ToggleDrivingMode: ToggleDrivingModeResponse!
@@ -55,6 +55,7 @@ type GetMyPlacesResponse {
 type Query {
   GetMyPlaces: GetMyPlacesResponse!
   GetMyProfile: GetMyProfileResponse!
+  GetNearbyDrivers: GetNearbyDriversResponse!
   user: User
 }
 
@@ -100,6 +101,10 @@ type CompletePhoneVerificationResponse {
   token: String
 }
 
+type Subscription {
+  DriversSubscription: User
+}
+
 type EmailSignInResponse {
   ok: Boolean!
   error: String
@@ -122,6 +127,12 @@ type GetMyProfileResponse {
   ok: Boolean!
   error: String
   user: User
+}
+
+type GetNearbyDriversResponse {
+  ok: Boolean!
+  error: String
+  drivers: [User]
 }
 
 type ReportMovementResponse {

@@ -15,6 +15,7 @@ const resolvers: Resolvers = {
       const { email, password } = args;
       try {
         const user = await User.findOne({ email });
+
         if (!user) {
           return {
             ok: false,
