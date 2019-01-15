@@ -20,7 +20,7 @@ const resolvers: Resolvers = {
 
         if (notNull.password !== null) {
           user.password = notNull.password;
-          await user.save();
+          user.save();
           delete notNull.password;
         }
 
