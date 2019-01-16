@@ -3,7 +3,6 @@ import { IsEmail } from "class-validator";
 import {
   BaseEntity,
   BeforeInsert,
-  BeforeUpdate,
   Column,
   CreateDateColumn,
   Entity,
@@ -102,17 +101,23 @@ class User extends BaseEntity {
     return bcrypt.compare(password, this.password);
   }
 
-  @BeforeInsert()
-  @BeforeUpdate()
-  async savePassword(): Promise<void> {
+  public async savePassword(): Promise<boolean> {
     if (this.password) {
       const hashedPassword = await this.hashPassword(this.password);
       this.password = hashedPassword;
+      return true;
+    } else {
+      return false;
     }
   }
 
   private hashPassword(password: string): Promise<string> {
     return bcrypt.hash(password, BCRYPT_ROUNDS);
+  }
+
+  @BeforeInsert()
+  async encyptBeforeInsert(): Promise<any> {
+    return await this.savePassword();
   }
 }
 
