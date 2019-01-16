@@ -7,6 +7,7 @@ import User from "../../../../src/entities/User";
 import createJWT from "../../../../src/utils/createJWT";
 import Verification from "../../../../src/entities/Verification";
 import { sendVerificationEmail } from "../../../../src/utils/sendEmail";
+import encryptToHash from "../../../../src/utils/encryptToHash";
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -30,6 +31,7 @@ const resolvers: Resolvers = {
             verified: true
           });
           if (phoneVerification) {
+            args.password = await encryptToHash(args.password);
             const newUser = await User.create({ ...args }).save();
 
             if (newUser.email) {
