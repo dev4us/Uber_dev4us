@@ -1,5 +1,6 @@
 import { Resolvers } from "../../../../src/types/resolvers";
 import privateResolver from "../../../../src/utils/resolverMiddleware";
+import encryptToHash from "../../../../src/utils/encryptToHash";
 import {
   UpdateUserProfileMutationArgs,
   UpdateUserProfileResponse
@@ -19,7 +20,7 @@ const resolvers: Resolvers = {
         const notNull: any = cleanNullArgs(args);
 
         if (notNull.password !== null) {
-          user.password = notNull.password;
+          user.password = await encryptToHash(notNull.password);
           user.save();
           delete notNull.password;
         }
