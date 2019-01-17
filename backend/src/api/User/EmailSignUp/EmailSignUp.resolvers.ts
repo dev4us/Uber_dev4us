@@ -46,6 +46,7 @@ const resolvers: Resolvers = {
                 emailVerification.key
               );
             }
+
             const token = createJWT(newUser.id);
 
             return {
