@@ -13,7 +13,7 @@ const GlobalStyle = createGlobalStyle`
   }
   a{
     color:inherit;
-    ttext-decoration:none;
+    text-decoration:none;
   }
   input,
   button{

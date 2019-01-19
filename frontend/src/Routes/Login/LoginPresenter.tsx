@@ -1,6 +1,6 @@
 import React from "react";
-import { RouteComponentProps } from "react-router-dom";
 import Helmet from "react-helmet";
+import { Link, RouteComponentProps } from "react-router-dom";
 import bgImage from "../../images/bg.png";
 import styled from "../../typed-components";
 
@@ -46,6 +46,7 @@ const FakeInput = styled.div`
 
 const PhoneLogin = styled.div`
   padding: 20px;
+  cursor: pointer;
 `;
 
 const Grey = styled.span`
@@ -61,6 +62,7 @@ const SocialLogin = styled.div`
 const SocialLink = styled.span`
   color: ${props => props.theme.blueColor};
   font-size: 20px;
+  cursor: pointer;
 `;
 
 interface IProps extends RouteComponentProps<any> {}
@@ -68,7 +70,7 @@ interface IProps extends RouteComponentProps<any> {}
 const LoginPresenter: React.SFC<IProps> = () => (
   <Container>
     <Helmet>
-      <title>Login | Uber</title>
+      <title>Login | Nuber</title>
     </Helmet>
     <Header>
       <Logo>
@@ -76,15 +78,19 @@ const LoginPresenter: React.SFC<IProps> = () => (
       </Logo>
     </Header>
     <Footer>
-      <PhoneLogin>
-        <Subtitle>Get moving with Nuber</Subtitle>
-        <FakeInput>
-          🇰🇷 +82 <Grey>Enter your mobile number</Grey>
-        </FakeInput>
-      </PhoneLogin>
-      <SocialLogin>
-        <SocialLink>Or connect with social</SocialLink>
-      </SocialLogin>
+      <Link to={"/phone-login"}>
+        <PhoneLogin>
+          <Subtitle>Get moving with Nuber</Subtitle>
+          <FakeInput>
+            🇰🇷 +82 <Grey>Enter your mobile number</Grey>
+          </FakeInput>
+        </PhoneLogin>
+      </Link>
+      <Link to={"/social-login"}>
+        <SocialLogin>
+          <SocialLink>Or connect with social</SocialLink>
+        </SocialLogin>
+      </Link>
     </Footer>
   </Container>
 );
