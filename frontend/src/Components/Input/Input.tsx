@@ -26,9 +26,9 @@ interface IProps {
   placeholder?: string;
   type?: string;
   required?: boolean;
-  value: any;
+  value?: any;
   name?: string;
-  onChange: any;
+  onChange?: any;
 }
 
 const Input: React.SFC<IProps> = ({
