@@ -4,7 +4,7 @@ import {
   StartPhoneVerificationResponse
 } from "src/types/graphql";
 import Verification from "../../../entities/Verification";
-import { sendVerificationSMS } from "../../../utils/sendSMS";
+// import { sendVerificationSMS } from "../../../utils/sendSMS";
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -28,7 +28,8 @@ const resolvers: Resolvers = {
         }).save();
 
         // To do: send sms
-        await sendVerificationSMS(newVerification.payload, newVerification.key);
+        // await sendVerificationSMS(newVerification.payload, newVerification.key);
+        console.log(newVerification.key);
 
         return {
           ok: true,
