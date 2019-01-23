@@ -1,10 +1,11 @@
 import React from "react";
-import { RouteComponentProps } from "react-router-dom";
-import VerifyPhonePresenter from "./VerifyPhonePresenter";
 import { Mutation } from "react-apollo";
-import { verifyPhone, verifyPhoneVariables } from "src/types/api";
-import { VERIFY_PHONE } from "./VerifyPhoneQueries";
+import { RouteComponentProps } from "react-router-dom";
 import { toast } from "react-toastify";
+import { LOG_USER_IN } from "../../sharedQueries";
+import { verifyPhone, verifyPhoneVariables } from "../../types/api";
+import VerifyPhonePresenter from "./VerifyPhonePresenter";
+import { VERIFY_PHONE } from "./VerifyPhoneQueries";
 
 interface IState {
   verificationKey: string;
@@ -29,28 +30,41 @@ class VerifyPhoneContainer extends React.Component<IProps, IState> {
   public render() {
     const { verificationKey, phoneNumber } = this.state;
     return (
-      <VerifyMutation
-        mutation={VERIFY_PHONE}
-        variables={{ key: verificationKey, phoneNumber }}
-        onCompleted={data => {
-          const { CompletePhoneVerification } = data;
-
-          if (CompletePhoneVerification.ok) {
-            toast.success("You're verified, loggin in now!");
-          } else {
-            toast.error(CompletePhoneVerification.error);
-          }
-        }}
-      >
-        {(mutation, { loading }) => (
-          <VerifyPhonePresenter
-            onSubmit={mutation}
-            onChange={this.onInputChange}
-            verificationKey={verificationKey}
-            loading={loading}
-          />
+      <Mutation mutation={LOG_USER_IN}>
+        {logUserIn => (
+          <VerifyMutation
+            mutation={VERIFY_PHONE}
+            variables={{
+              key: verificationKey,
+              phoneNumber
+            }}
+            onCompleted={data => {
+              const { CompletePhoneVerification } = data;
+              if (CompletePhoneVerification.ok) {
+                if (CompletePhoneVerification.token) {
+                  logUserIn({
+                    variables: {
+                      token: CompletePhoneVerification.token
+                    }
+                  });
+                }
+                toast.success("You're verified, loggin in now");
+              } else {
+                toast.error(CompletePhoneVerification.error);
+              }
+            }}
+          >
+            {(mutation, { loading }) => (
+              <VerifyPhonePresenter
+                onSubmit={mutation}
+                onChange={this.onInputChange}
+                verificationKey={verificationKey}
+                loading={loading}
+              />
+            )}
+          </VerifyMutation>
         )}
-      </VerifyMutation>
+      </Mutation>
     );
   }
 
