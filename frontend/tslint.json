@@ -11,6 +11,8 @@
   "rules": {
     "ordered-imports": false,
     "max-classes-per-file": false,
-    "jsx-no-lambda": false
+    "jsx-no-lambda": false,
+    "no-console": false,
+    "object-literal-sort-keys": false
   }
 }
