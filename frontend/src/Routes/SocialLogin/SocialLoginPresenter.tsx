@@ -1,6 +1,6 @@
 import React from "react";
-import Helmet from "react-helmet";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
+import Helmet from "react-helmet";
 import BackArrow from "../../Components/BackArrow";
 import styled from "../../typed-components";
 
@@ -44,8 +44,9 @@ const SocialLoginPresenter: React.SFC<IProps> = ({ loginCallback }) => (
     <FacebookLogin
       appId="1408839985924682"
       autoLoad={false}
-      fields="first_name, email,last_name, name"
+      fields="name,first_name,last_name,email"
       callback={loginCallback}
+      disableMobileRedirect={true}
       render={renderProps => (
         <Link onClick={renderProps.onClick}>
           <Icon>
@@ -65,5 +66,4 @@ const SocialLoginPresenter: React.SFC<IProps> = ({ loginCallback }) => (
     />
   </Container>
 );
-
 export default SocialLoginPresenter;

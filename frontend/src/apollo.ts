@@ -13,9 +13,11 @@ const client = new ApolloClient({
         logUserIn: (_, { token }, { cache }) => {
           localStorage.setItem("jwt", token);
           cache.writeData({
-            auth: {
-              __typename: "Auth",
-              isLoggedIn: true
+            data: {
+              auth: {
+                __typename: "Auth",
+                isLoggedIn: true
+              }
             }
           });
           return null;
@@ -23,9 +25,11 @@ const client = new ApolloClient({
         logUserOut: (_, __, { cache }) => {
           localStorage.removeItem("jwt");
           cache.writeData({
-            auth: {
-              __typename: "Auth",
-              isLoggedIn: false
+            data: {
+              auth: {
+                __typename: "Auth",
+                isLoggedIn: false
+              }
             }
           });
         }
