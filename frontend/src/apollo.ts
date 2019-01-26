@@ -32,13 +32,14 @@ const client = new ApolloClient({
               }
             }
           });
+          return null;
         }
       }
     }
   },
   request: async (operation: Operation) => {
     operation.setContext({
-      header: {
+      headers: {
         "X-JWT": localStorage.getItem("jwt") || ""
       }
     });

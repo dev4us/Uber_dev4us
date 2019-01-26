@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "react-sidebar": "^3.0.2"
+  },
+  "devDependencies": {
+    "@types/react-sidebar": "^3.0.0"
+  }
+}
