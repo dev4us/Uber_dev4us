@@ -1,12 +1,12 @@
-import { Resolvers } from "../../../../src/types/resolvers";
-import privateResolver from "../../../../src/utils/resolverMiddleware";
-import encryptToHash from "../../../../src/utils/encryptToHash";
+import { Resolvers } from "../../../types/resolvers";
+import privateResolver from "../../../utils/resolverMiddleware";
+import encryptToHash from "../../../utils/encryptToHash";
 import {
   UpdateUserProfileMutationArgs,
   UpdateUserProfileResponse
-} from "../../../../src/types/graphql";
-import User from "../../../../src/entities/User";
-import cleanNullArgs from "../../../../src/utils/cleanNullArgs";
+} from "../../../types/graphql";
+import User from "../../../entities/User";
+import cleanNullArgs from "../../../utils/cleanNullArgs";
 
 const resolvers: Resolvers = {
   Mutation: {
