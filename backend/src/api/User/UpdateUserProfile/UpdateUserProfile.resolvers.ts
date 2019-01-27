@@ -19,7 +19,7 @@ const resolvers: Resolvers = {
         const user: User = req.user;
         const notNull: any = cleanNullArgs(args);
 
-        if (notNull.password !== null) {
+        if ("password" in notNull) {
           user.password = await encryptToHash(notNull.password);
           user.save();
           delete notNull.password;
