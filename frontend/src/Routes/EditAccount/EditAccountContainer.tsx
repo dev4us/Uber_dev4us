@@ -84,18 +84,23 @@ class EditAccountContainer extends React.Component<IProps, IState> {
   };
 
   public updateFields = (data: {} | userProfile) => {
-    if ("GetMyProfile" in data) {
-      const {
-        GetMyProfile: { user }
-      } = data;
-      if (user !== null) {
-        const { firstName, lastName, email, profilePhoto } = user;
-        this.setState({
-          email,
-          firstName,
-          lastName,
-          profilePhoto
-        } as any);
+    const { firstName } = this.state;
+
+    if (firstName === "" || null) {
+      if ("GetMyProfile" in data) {
+        const {
+          GetMyProfile: { user }
+        } = data;
+        if (user !== null) {
+          // tslint:disable-next-line
+          const { firstName, lastName, email, profilePhoto } = user;
+          this.setState({
+            email,
+            firstName,
+            lastName,
+            profilePhoto
+          } as any);
+        }
       }
     }
   };
