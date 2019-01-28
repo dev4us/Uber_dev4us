@@ -5,7 +5,7 @@ export const UPDATE_PROFILE = gql`
     $firstName: String!
     $lastName: String!
     $email: String!
-    $profilePhoto: String!
+    $profilePhoto: String
   ) {
     UpdateUserProfile(
       firstName: $firstName
