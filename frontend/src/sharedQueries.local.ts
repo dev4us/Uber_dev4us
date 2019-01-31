@@ -5,3 +5,8 @@ export const LOG_USER_IN = gql`
     logUserIn(token: $token) @client
   }
 `;
+export const LOG_USER_OUT = gql`
+  mutation logUserOut {
+    logUserOut @client
+  }
+`;
