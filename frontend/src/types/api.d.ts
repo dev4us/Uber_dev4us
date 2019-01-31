@@ -36,7 +36,7 @@ export interface updateProfileVariables {
   firstName: string;
   lastName: string;
   email: string;
-  profilePhoto: string;
+  profilePhoto?: string | null;
 }
 
 /* tslint:disable */
@@ -134,6 +134,32 @@ export interface userProfile_GetMyProfile {
 
 export interface userProfile {
   GetMyProfile: userProfile_GetMyProfile;
+}
+
+/* tslint:disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: getPlaces
+// ====================================================
+
+export interface getPlaces_GetMyPlaces_places {
+  __typename: "Place";
+  id: number;
+  name: string;
+  address: string;
+  isFav: boolean;
+}
+
+export interface getPlaces_GetMyPlaces {
+  __typename: "GetMyPlacesResponse";
+  ok: boolean;
+  error: string | null;
+  places: (getPlaces_GetMyPlaces_places | null)[] | null;
+}
+
+export interface getPlaces {
+  GetMyPlaces: getPlaces_GetMyPlaces;
 }
 
 /* tslint:disable */
