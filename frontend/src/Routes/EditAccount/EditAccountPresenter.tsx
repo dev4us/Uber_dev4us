@@ -72,7 +72,7 @@ const EditAccountPresenter: React.SFC<IProps> = ({
         placeholder={"Email"}
         onChange={onInputChange}
       />
-      <Button value={loading ? "Loading.." : "Update"} onClick={null} />
+      <Button value={uploading ? "Loading.." : "Update"} onClick={null} />
     </ExtendedForm>
   </Container>
 );
