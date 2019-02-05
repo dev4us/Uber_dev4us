@@ -32,6 +32,7 @@
     "codegen": "apollo codegen:generate src/types/api.d.ts --queries='src/**/!(*.local).ts' --addTypename --localSchemaFile schema.json --target typescript --outputFlat"
   },
   "devDependencies": {
+    "@types/axios": "^0.14.0",
     "@types/googlemaps": "^3.30.16",
     "@types/jest": "^23.3.12",
     "@types/node": "^10.12.18",
