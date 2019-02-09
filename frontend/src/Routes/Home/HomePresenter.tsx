@@ -5,6 +5,7 @@ import AddressBar from "../../Components/AddressBar";
 import Button from "../../Components/Button";
 import Menu from "../../Components/Menu";
 import styled from "../../typed-components";
+import { userProfile } from "../../types/api";
 
 const Container = styled.div``;
 
@@ -41,6 +42,10 @@ const ExtendedButton = styled(Button)`
   width: 80%;
 `;
 
+const RequestButton = ExtendedButton.extend`
+  bottom: 250px;
+`;
+
 interface IProps {
   isMenuOpen: boolean;
   toggleMenu: () => void;
@@ -48,6 +53,8 @@ interface IProps {
   mapRef: any;
   toAddress: string;
   onAddressSubmit: () => void;
+  price?: string;
+  data?: userProfile;
   onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -58,7 +65,9 @@ const HomePresenter: React.SFC<IProps> = ({
   toAddress,
   mapRef,
   onInputChange,
-  onAddressSubmit
+  onAddressSubmit,
+  price,
+  data: { GetMyProfile: { user = null } = {} } = {}
 }) => (
   <Container>
     <Helmet>
@@ -77,18 +86,29 @@ const HomePresenter: React.SFC<IProps> = ({
       }}
     >
       {!loading && <MenuButton onClick={toggleMenu}>|||</MenuButton>}
-      <AddressBar
-        name={"toAddress"}
-        onChange={onInputChange}
-        value={toAddress}
-        onBlur={null}
-      />
-      <ExtendedButton
-        onClick={onAddressSubmit}
-        disabled={toAddress === ""}
-        value={"Pick Address"}
-      />
-      <Map ref={mapRef} />
+      {user && !user.isDriving && (
+        <React.Fragment>
+          <AddressBar
+            name={"toAddress"}
+            onChange={onInputChange}
+            value={toAddress}
+            onBlur={null}
+          />
+          <ExtendedButton
+            onClick={onAddressSubmit}
+            disabled={toAddress === ""}
+            value={price ? "Change address" : "Pick Address"}
+          />
+        </React.Fragment>
+      )}
+      {price && (
+        <RequestButton
+          onClick={onAddressSubmit}
+          disabled={toAddress === ""}
+          value={`Request Ride ($${price})`}
+        />
+      )}
+      <Map innerRef={mapRef} />
     </Sidebar>
   </Container>
 );
